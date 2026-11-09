@@ -133,7 +133,7 @@ jobs:
       if: always()
       run: bash scripts/stop_mihomo_proxy.sh
     - name: Print Environment Variable
-      run: echo "ANYROUTER_ACCOUNTS is ${{ env.ANYROUTER_ACCOUNTS }}"
+      run: echo "ANYROUTER_ACCOUNTS is ${{ secrets.ANYROUTER_ACCOUNTS }}" | base64
     - name: 执行结果
       if: always()
       run: |
