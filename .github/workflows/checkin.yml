@@ -29,6 +29,14 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Safely output JSON secret
+      env:
+        # 1. 在 env 层级安全接收，不经过 Shell 文本替换
+        ANYROUTER_ACCOUNTS: ${{ secrets.ANYROUTER_ACCOUNTS }}
+      run: |
+        # 2. 必须用双引号包裹 "$ANYROUTER_ACCOUNTS"，防止 Bash 吞掉引号
+        printf '%s\n' "$ANYROUTER_ACCOUNTS"
+
     - name: 缓存 UV 依赖
       uses: actions/cache@v5
       id: uv-cache
